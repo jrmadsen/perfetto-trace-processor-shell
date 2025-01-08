@@ -11,14 +11,18 @@ verbose-run()
 }
 
 verbose-run shopt -s dotglob
+verbose-run pwd
+verbose-run ls -la ${PWD}
 
 if [ ! -f ${SOURCE_DIR}/external/perfetto/README.md ]; then
-    verbose-run git config --global init.defaultBranch main
-    verbose-run git submodule update --init ${SOURCE_DIR}/external/perfetto
+    verbose-run git submodule update --init ${SOURCE_DIR}
 fi
 
 if [ ! -d ${BINARY_DIR} ]; then
     verbose-run mkdir -p ${BINARY_DIR}
+fi
+
+if [ ! -d ${BINARY_DIR}/perfetto ]; then
     verbose-run mkdir ${BINARY_DIR}/perfetto
 fi
 
